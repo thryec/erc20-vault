@@ -1,8 +1,8 @@
-# ERC20 Vault
+# ERC-20 Vault
 
 https://github.com/yieldprotocol/mentorship2022/issues/2
 
-### Objectives
+## Objectives
 
 1. Users can send a pre-specified ERC-20 token to a Vault contract.
 2. The contract records the user's balance.
@@ -13,9 +13,9 @@ https://github.com/yieldprotocol/mentorship2022/issues/2
 7. User calls a function that instructs the Vault to take from them an amount of Token
 8. User can withdraw their deposit at any time. The Token is returned, and the Vault updates its user records.
 
-### Functions
+## Functions
 
-#### Vault Contract
+### Vault Contract
 
 `constructor()`
 
@@ -35,7 +35,12 @@ https://github.com/yieldprotocol/mentorship2022/issues/2
 - updates the mapping of user's holdings in storage accordingly
 - emits a Withdrawn event
 
-#### ERC20 Contract
+### ERC20 Contract
 
-- public mint function to allow users to mint from it
-- approve function for vault to access users' tokens
+`mint()`
+
+- public mint function that allow users to mint an unlimited amount (for the purposes of this exercise)
+
+`approve()`
+
+- approve vault to access users' tokens
