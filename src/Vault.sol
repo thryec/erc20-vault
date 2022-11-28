@@ -21,11 +21,11 @@ contract Vault {
     }
 
     function deposit(uint256 amount) public {
+        records[msg.sender] = amount;
         bool success = token.transferFrom(msg.sender, address(this), amount);
         if (!success) {
             revert TransferFailed();
         }
-        records[msg.sender] = amount;
         emit Deposit(msg.sender, amount);
     }
 
@@ -36,11 +36,12 @@ contract Vault {
         if (records[msg.sender] < amount) {
             revert InsufficientAmount(records[msg.sender], amount);
         }
+        records[msg.sender] -= amount;
         bool success = token.transferFrom(address(this), msg.sender, amount);
         if (!success) {
             revert TransferFailed();
         }
-        records[msg.sender] -= amount;
+
         emit Withdraw(msg.sender, amount);
     }
 }
