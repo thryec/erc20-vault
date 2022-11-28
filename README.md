@@ -39,7 +39,7 @@ https://github.com/yieldprotocol/mentorship2022/issues/2
 
 `mint()`
 
-- public mint function that allow users to mint an unlimited amount (for the purposes of this exercise)
+- public mint function should allow users to mint any amount of tokens (for the purposes of this exercise)
 
 `approve()`
 
