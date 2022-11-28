@@ -33,7 +33,7 @@ https://github.com/yieldprotocol/mentorship2022/issues/2
 - checks that the user has a positive token balanace in the vault
 - sends the desired number of tokens from the vault to the user
 - updates the mapping of user's holdings in storage accordingly
-- emits a Withdrawn event
+- emits a Withdraw event
 
 ### ERC20 Contract
 
