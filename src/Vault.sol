@@ -1,0 +1,6 @@
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+contract Vault {
+    uint256 public number;
+}
