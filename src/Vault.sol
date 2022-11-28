@@ -14,28 +14,33 @@ contract Vault {
 
     error NoDeposits();
     error InsufficientAmount(uint256 available, uint256 requested);
+    error TransferFailed();
 
     constructor(address erc20Address) {
         token = IERC20(erc20Address);
     }
 
     function deposit(uint256 amount) public {
-        token.transferFrom(msg.sender, address(this), amount);
+        bool success = token.transferFrom(msg.sender, address(this), amount);
+        if (!success) {
+            revert TransferFailed();
+        }
         records[msg.sender] = amount;
         emit Deposit(msg.sender, amount);
     }
 
-    function withdraw(uint256 amount) public returns (uint256 updatedBalance) {
+    function withdraw(uint256 amount) public {
         if (records[msg.sender] == 0) {
             revert NoDeposits();
         }
         if (records[msg.sender] < amount) {
             revert InsufficientAmount(records[msg.sender], amount);
         }
-        token.transferFrom(address(this), msg.sender, amount);
-        uint256 newBalance = records[msg.sender] - amount;
-        records[msg.sender] = newBalance;
+        bool success = token.transferFrom(address(this), msg.sender, amount);
+        if (!success) {
+            revert TransferFailed();
+        }
+        records[msg.sender] -= amount;
         emit Withdraw(msg.sender, amount);
-        return newBalance;
     }
 }
